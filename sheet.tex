@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper]{geometry}
+\usepackage{titling}
+\usepackage[ngerman]{babel}
+\usepackage{hyperref}
+
+\usepackage{minted}
+\usemintedstyle{emacs}
+
+\setlength{\droptitle}{-10em}
+\renewcommand{\familydefault}{\sfdefault} 
+
+\title{Linux Command Sheet}
+\author{Florian Weingartshofer}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents{}
+\newpage
+\section{Basics}
+\subsection{Commands}
+Ein Command besteht aus verschiedenen Komponenten:
+
+\begin{minted}{cmdlexer.py:CommandLexer -x}
+ls --all -l /home/
+\end{minted}
+
+\mint{cmdlexer.py:CommandLexer -x}{ls} Das Command selbst
+
+\mint{cmdlexer.py:CommandLexer -x}{--all}
+Eine ausgeschriebene Option, diese beginnen mit einem doppeltem Minus.
+
+\mint{cmdlexer.py:CommandLexer -x}{-l}
+Die Kurzform einer Option, wird nur mit einem Minus geschrieben.
+
+\mint{cmdlexer.py:CommandLexer -x}{/home/}
+Ein Argument, manche Commands können mehrere Argumente erhalten.
+
+\subsection{Files und Directories}
+\mint{bash}{file.docx}
+Ein normales File.
+
+\mint{bash}{stuff/}
+Ein normales Directory, diese enden immer auf ein \mintinline{bash}{/}.
+
+\mint{bash}{.hidden.txt}
+Ein verstecktes File, sie beginnen immer mit einem Punkt.
+
+\mint{bash}{.hidden_dir/}
+Ein verstecktes Directory beginnt auch mit einem Punkt.
+
+\subsection{Files auflisten}
+\mint{cmdlexer.py:CommandLexer -x}{ls}
+Zeigt Files und Directories im momentanen Ordner an.
+
+\mint{cmdlexer.py:CommandLexer -x}{ls -l}
+Zeigt Files, etc in einer Listenstruktur an.
+
+\mint{cmdlexer.py:CommandLexer -x}{ls -a}
+Zeigt \textbf{alle} Files und Ordner an, auch versteckte.
+
+\mint{cmdlexer.py:CommandLexer -x}{ls -la}
+Es können auch verschiedene Optionen kombiniert werden.
+
+\mint{cmdlexer.py:CommandLexer -x}{ls -h}
+
+\subsection{Erstellen von Directories}
+
+\mint{cmdlexer.py:CommandLexer -x}{mkdir <directory>}
+Ein Directory im momentanen Directory erstellen.
+
+\mint{cmdlexer.py:CommandLexer -x}{mkdir /path/to/dir/newdir/}
+Es kann auch ein Directory mit einem Pfad angegeben werden.
+
+Dabei ist das letzte Directory, dass das nur erstellt wird.
+
+\mint{cmdlexer.py:CommandLexer -x}{mkdir -p new/dir}
+Mit der P-Flag können auch SUbdirectories rekursiv erstellt werden.
+
+\mint{cmdlexer.py:CommandLexer -x}{mkdir {dir1,dir2,dir3}}
+Mit den geschwungene Klammern können mehrer Directories gleichzeitig erstellt werden.
+
+\mint{cmdlexer.py:CommandLexer -x}{mkdir -p new/{dir1,dir2,dir3}}
+Die Directories können auch rekursiv in einem Parent-Directory erstellt werden.
+
+
+\section*{Get Help}
+\subsection*{Man-Page}
+Linux hat eine Bedinungsanleitung eingebaut, die sogenannte Man-Page.
+Diese sind nur zu gebrauchen, wenn man das Command schon kennt.
+\mint{cmdlexer.py:CommandLexer -x}{man <command>}
+
+\subsection*{\href{https://tldr.sh/}{TL;DR}}
+Ein Tool mit Zusammenfassungen und Beispielen für verschieden Commands: \href{https://tldr.sh/}{https://tldr.sh}
+
+\end{document}
