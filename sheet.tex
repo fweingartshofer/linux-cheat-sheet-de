@@ -40,21 +40,24 @@ Die Kurzform einer Option, wird nur mit einem Minus geschrieben.
 Ein Argument, manche Commands können mehrere Argumente erhalten.
 
 \subsection{Files und Directories}
-\mint{bash}{file.docx}
+\mint{cmdlexer.py:CommandLexer -x}{file.docx}
 Ein normales File.
 
-\mint{bash}{stuff/}
+\mint{cmdlexer.py:CommandLexer -x}{stuff/}
 Ein normales Directory, diese enden immer auf ein \mintinline{bash}{/}.
 
-\mint{bash}{.hidden.txt}
+\mint{cmdlexer.py:CommandLexer -x}{.hidden.txt}
 Ein verstecktes File, sie beginnen immer mit einem Punkt.
 
-\mint{bash}{.hidden_dir/}
+\mint{cmdlexer.py:CommandLexer -x}{.hidden_dir/}
 Ein verstecktes Directory beginnt auch mit einem Punkt.
 
 \subsection{Files auflisten}
 \mint{cmdlexer.py:CommandLexer -x}{ls}
 Zeigt Files und Directories im momentanen Ordner an.
+
+\mint{cmdlexer.py:CommandLexer -x}{ls <directory>}
+Zeigt Files in einem Directory an.
 
 \mint{cmdlexer.py:CommandLexer -x}{ls -l}
 Zeigt Files, etc in einer Listenstruktur an.
@@ -62,10 +65,11 @@ Zeigt Files, etc in einer Listenstruktur an.
 \mint{cmdlexer.py:CommandLexer -x}{ls -a}
 Zeigt \textbf{alle} Files und Ordner an, auch versteckte.
 
+\mint{cmdlexer.py:CommandLexer -x}{ls -h}
+Zeigt alle von Menschen lesbare Dateien und Directories an.
+
 \mint{cmdlexer.py:CommandLexer -x}{ls -la}
 Es können auch verschiedene Optionen kombiniert werden.
-
-\mint{cmdlexer.py:CommandLexer -x}{ls -h}
 
 \subsection{Erstellen von Directories}
 
@@ -89,9 +93,12 @@ Die Directories können auch rekursiv in einem Parent-Directory erstellt werden.
 \subsection{Erstellen von Files}
 
 \mint{cmdlexer.py:CommandLexer -x}{touch </path/to/file.txt}
-Mit \mint{cmdlexer.py:CommandLexer -x}{touch} kann ein File erstellt werden.
+Mit \mintinline{cmdlexer.py:CommandLexer -x}{touch} kann ein File erstellt werden.
 
-Falls das File schon exisitiert wird das ChangedOn Datum aktualisiert.
+Falls das File schon exisitiert wird das Datum aktualisiert.
+
+\mint{cmdlexer.py:CommandLexer -x}{touch {file1,file2,file3}} 
+
 
 \section*{Get Help}
 \subsection*{Man-Page}
