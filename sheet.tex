@@ -70,25 +70,6 @@ Ein verstecktes File, sie beginnen immer mit einem Punkt.
 \mint{cmdlexer.py:CommandLexer -x}{.hidden_dir/}
 Ein verstecktes Directory beginnt auch mit einem Punkt.
 
-\subsection{Files auflisten}
-\mint{cmdlexer.py:CommandLexer -x}{ls}
-Zeigt Files und Directories im momentanen Ordner an.
-
-\mint{cmdlexer.py:CommandLexer -x}{ls <directory>}
-Zeigt Files in einem Directory an.
-
-\mint{cmdlexer.py:CommandLexer -x}{ls -l}
-Zeigt Files, etc in einer Listenstruktur an.
-
-\mint{cmdlexer.py:CommandLexer -x}{ls -a}
-Zeigt \textbf{alle} Files und Ordner an, auch versteckte.
-
-\mint{cmdlexer.py:CommandLexer -x}{ls -h}
-Zeigt alle von Menschen lesbare Dateien und Directories an.
-
-\mint{cmdlexer.py:CommandLexer -x}{ls -la}
-Es können auch verschiedene Optionen kombiniert werden.
-
 \subsection{Commands}
 Ein Command besteht aus verschiedenen Komponenten:
 
@@ -110,8 +91,39 @@ Ein Argument, manche Commands können mehrere Argumente erhalten.
 \subsection{Navigieren}
 Mit \mintinline{cmdlexer.py:CommandLexer -x}{cd} kann im Terminal navigiert werden.
 
-\mint{cmdlexer.py:CommandLexer -x}{cd dir/}
+\mint{cmdlexer.py:CommandLexer -x}{cd path/to/dir/}
 In ein Directory wechseln.
+
+\mint{cmdlexer.py:CommandLexer -x}{cd}
+Wechselt ins Home-Directory.
+
+\mint{cmdlexer.py:CommandLexer -x}{cd ..}
+Ins Parent-Directory wechseln.
+
+\mint{cmdlexer.py:CommandLexer -x}{cd -}
+Ins vorherige Directory wechseln.
+
+\subsection{Files auflisten}
+\mint{cmdlexer.py:CommandLexer -x}{pwd}
+Zeigt absoluten Pfad zum momentanen Directory an.
+
+\mint{cmdlexer.py:CommandLexer -x}{ls}
+Zeigt Files und Directories im momentanen Ordner an.
+
+\mint{cmdlexer.py:CommandLexer -x}{ls <directory>}
+Zeigt Files in einem Directory an.
+
+\mint{cmdlexer.py:CommandLexer -x}{ls -l}
+Zeigt Files, etc in einer Listenstruktur an.
+
+\mint{cmdlexer.py:CommandLexer -x}{ls -a}
+Zeigt \textbf{alle} Files und Ordner an, auch versteckte.
+
+\mint{cmdlexer.py:CommandLexer -x}{ls -h}
+Zeigt alle von Menschen lesbare Dateien und Directories an.
+
+\mint{cmdlexer.py:CommandLexer -x}{ls -la}
+Es können auch verschiedene Optionen kombiniert werden.
 
 \subsection{Erstellen von Directories}
 
@@ -124,7 +136,7 @@ Es kann auch ein Directory mit einem Pfad angegeben werden.
 Dabei ist das letzte Directory, dass das nur erstellt wird.
 
 \mint{cmdlexer.py:CommandLexer -x}{mkdir -p new/dir}
-Mit der P-Flag können auch SUbdirectories rekursiv erstellt werden.
+Mit der p-Flag können auch Subdirectories rekursiv erstellt werden.
 
 \mint{cmdlexer.py:CommandLexer -x}{mkdir {dir1,dir2,dir3}}
 Mit den geschwungene Klammern können mehrer Directories gleichzeitig erstellt werden.
