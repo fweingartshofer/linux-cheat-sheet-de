@@ -1,5 +1,7 @@
 sudo: required
-os: linux arch: arm64 dist: bionic
+os: linux
+arch: arm64
+dist: bionic
 language: python
 branches:
   only:
