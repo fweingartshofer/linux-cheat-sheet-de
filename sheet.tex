@@ -86,6 +86,12 @@ Mit den geschwungene Klammern können mehrer Directories gleichzeitig erstellt w
 \mint{cmdlexer.py:CommandLexer -x}{mkdir -p new/{dir1,dir2,dir3}}
 Die Directories können auch rekursiv in einem Parent-Directory erstellt werden.
 
+\subsection{Erstellen von Files}
+
+\mint{cmdlexer.py:CommandLexer -x}{touch </path/to/file.txt}
+Mit \mint{cmdlexer.py:CommandLexer -x}{touch} kann ein File erstellt werden.
+
+Falls das File schon exisitiert wird das ChangedOn Datum aktualisiert.
 
 \section*{Get Help}
 \subsection*{Man-Page}

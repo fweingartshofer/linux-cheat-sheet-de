@@ -1,5 +1,6 @@
 sudo: required
-dist: trusty
+os: linux arch: arm64 dist: bionic
+language: python
 branches:
   only:
     - master
