@@ -70,6 +70,11 @@ Ein verstecktes File, sie beginnen immer mit einem Punkt.
 \mint{cmdlexer.py:CommandLexer -x}{.hidden_dir/}
 Ein verstecktes Directory beginnt auch mit einem Punkt.
 
+\subsection{Wichtige Files}
+\subsubsection{.bashrc}
+Das \mintinline{cmdlexer.py:CommandLexer -x}{.bashrc} File ist ein Bash-Script, welches beim öffnen eines Terminals ausgeführt wird.
+Man kann es nutzen um Environment Variablen, Aliases zu setzen oder andere Einstellungen vorzunehmen.
+
 \subsection{Commands}
 Ein Command besteht aus verschiedenen Komponenten:
 
@@ -152,6 +157,15 @@ Mit \mintinline{cmdlexer.py:CommandLexer -x}{touch} kann ein File erstellt werde
 Falls das File schon exisitiert wird das Datum aktualisiert.
 
 \mint{cmdlexer.py:CommandLexer -x}{touch {file1,file2,file3}} 
+
+\subsection{Alias}
+Mit Aliases kann man Commands abkürzen.
+
+\mint{cmdlexer.py:CommandLexer -x}{alias hello='clear && echo "Hello"'}
+
+\subsection{dos2unix}
+\mintinline{cmdlexer.py:CommandLexer -x}{dos2unix} ist kein Standardpaket und muss daher installiert werden.
+Es ist ein einfaches Tool um DOS(Windows) Newlines zu Unix Newlines zu konvertieren. 
 
 \section{Get Help}
 \subsection{Man-Page}
