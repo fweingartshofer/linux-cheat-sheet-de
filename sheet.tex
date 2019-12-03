@@ -14,6 +14,9 @@
 
 \usepackage{lmodern}
 \usepackage{minted}
+\newcommand{\cmdinline}[1]{\mintinline{cmdlexer.py:CommandLexer -x}{#1}}
+\newcommand{\cmdline}[1]{\mint{cmdlexer.py:CommandLexer -x}{#1}}
+
 \usemintedstyle{emacs}
 
 \setlength{\droptitle}{-10em}
@@ -30,175 +33,207 @@
 \section{Basics}
 
 \subsection{Filesystem}
-Das Linux Filesystem beginnt bei Root (der Pfad lautet: \mintinline{cmdlexer.py:CommandLexer -x}{/}).
+Das Linux Filesystem beginnt bei Root (der Pfad lautet: \cmdinline{/}).
 Von dort beginnt jeder absolute Pfad.\\
-Wenn man ein Terminal startet ist man normalerweiße im Home Directory (\mintinline{cmdlexer.py:CommandLexer -x}{/home/<username>/}).
+Wenn man ein Terminal startet ist man normalerweiße im Home Directory (\cmdinline{/home/<username>/}).
 
 \subsubsection{Home Directory}
 Jeder User hat ein Home Directory, dieses enthält Files welche nur für diesen User gelten, zb Configs, Bilder oder Dokumente.
-Das Home Directory liegt in \mintinline{cmdlexer.py:CommandLexer -x}{/home/<username>/}
-oder unter der Environment Variable \mintinline{cmdlexer.py:CommandLexer -x}{$HOME}.
+Das Home Directory liegt in \cmdinline{/home/<username>/}
+oder unter der Environment Variable \cmdinline{$HOME}.
 
 \subsubsection{Die Tilde}
-In den meisten Shells, wie die Bash, führt die Tilde (\mintinline{cmdlexer.py:CommandLexer -x}{~}) direkt ins Home Directory des Users.
+In den meisten Shells, wie die Bash, führt die Tilde (\cmdinline{~}) direkt ins Home Directory des Users.
 Allerdings hat sie noch andere Funktionen.
 
-\mint{cmdlexer.py:CommandLexer -x}{~<username>}
+\cmdline{~<username>}
 Home Directory von <username>.
 
-\mint{cmdlexer.py:CommandLexer -x}{~-}
+\cmdline{~-}
 Das vorherige Working Directory.
 
-\mint{cmdlexer.py:CommandLexer -x}{~+}
+\cmdline{~+}
 Das momentane Working Directory.
 \\\\
 Weiter Infos:
 \href{https://stackoverflow.com/questions/998626/meaning-of-tilde-in-linux-bash-not-home-directory}{https://stackoverflow.com}
 
 \subsection{Files und Directories}
-\mint{cmdlexer.py:CommandLexer -x}{file.docx}
+\cmdline{file.docx}
 Ein normales File.
 
-\mint{cmdlexer.py:CommandLexer -x}{stuff/}
-Ein normales Directory, diese enden immer auf ein \mintinline{bash}{/}.
+\cmdline{stuff/}
+Ein normales Directory, diese enden immer auf ein \cmdinline{/}.
 
-\mint{cmdlexer.py:CommandLexer -x}{.hidden.txt}
+\cmdline{.hidden.txt}
 Ein verstecktes File, sie beginnen immer mit einem Punkt.
 
-\mint{cmdlexer.py:CommandLexer -x}{.hidden_dir/}
+\cmdline{.hidden_dir/}
 Ein verstecktes Directory beginnt auch mit einem Punkt.
 
-\subsection{Wichtige Files}
-Folgende Files können im \mintinline{cmdlexer.py:CommandLexer -x}{$HOME} Directory gefunden werden.
+\subsection{Wichtige Files und Directories}
+Folgende Files und Directories können im \cmdinline{$HOME} Directory gefunden werden.
 \subsubsection{.bashrc}
-Das \mintinline{cmdlexer.py:CommandLexer -x}{.bashrc} File ist ein Bash-Script, welches beim öffnen eines Terminals ausgeführt wird.
+Das \cmdinline{.bashrc} File ist ein Bash-Script, welches beim öffnen eines Terminals ausgeführt wird.
 Man kann es nutzen um Environment Variablen, Aliases zu setzen oder andere Einstellungen vorzunehmen.
 Es können auch Splashscreens oder Nachrichten ausgegeben werden.
 
 \begin{minted}{cmdlexer.py:CommandLexer -x}
-echo "Das heutige Wetter"
-curl wttr.in # Download the weather
+  echo "Das heutige Wetter"
+  curl wttr.in # Download the weather
 \end{minted}
 
-\subsection{Commands}
+\subsubsection{.zshrc}
+Ein Init Script für die Z-Shell. Hat die selbe Funktionalität wie das \cmdinline{.bashrc}.
+
+\subsubsection{.config/}
+Das \cmdinline{.config/} Directory ist ein Ordner im \cmdinline{.config/}
+In diesem Directory werden einige Config-Files gespeichert.
+
+\subsection{Aufbau eines Commands}
 Ein Command besteht aus verschiedenen Komponenten:
 
 \begin{minted}{cmdlexer.py:CommandLexer -x}
 ls --all -l /home/
 \end{minted}
 
-\mint{cmdlexer.py:CommandLexer -x}{ls} Das Command selbst
+\cmdline{ls} Das Command selbst
 
-\mint{cmdlexer.py:CommandLexer -x}{--all}
+\cmdline{--all}
 Eine ausgeschriebene Option, diese beginnen mit einem doppeltem Minus.
 
-\mint{cmdlexer.py:CommandLexer -x}{-l}
+\cmdline{-l}
 Die Kurzform einer Option, wird nur mit einem Minus geschrieben.
 
-\mint{cmdlexer.py:CommandLexer -x}{/home/}
+\cmdline{/home/}
 Ein Argument, manche Commands können mehrere Argumente erhalten.
 
-\subsection{Navigieren}
-Mit \mintinline{cmdlexer.py:CommandLexer -x}{cd} kann im Terminal navigiert werden.
+\subsection{sudo}
+Um einen Befehl als Admin auszuführen muss der \cmdinline{sudo} Befehl genutzt werden.
 
-\mint{cmdlexer.py:CommandLexer -x}{cd path/to/dir/}
+\cmdline{sudo <Befehl>}
+
+\noindent
+Beispiel:
+\cmdline{sudo rm <file>}
+
+\subsection{Navigieren}
+Mit \cmdinline{cd} kann im Terminal navigiert werden.
+
+\cmdline{cd path/to/dir/}
 In ein Directory wechseln.
 
-\mint{cmdlexer.py:CommandLexer -x}{cd}
+\cmdline{cd}
 Wechselt ins Home-Directory.
 
-\mint{cmdlexer.py:CommandLexer -x}{cd ..}
+\cmdline{cd ..}
 Ins Parent-Directory wechseln.
 
-\mint{cmdlexer.py:CommandLexer -x}{cd -}
+\cmdline{cd -}
 Ins vorherige Directory wechseln.
 
 \subsection{Files auflisten}
-\mint{cmdlexer.py:CommandLexer -x}{pwd}
+\cmdline{pwd}
 Zeigt absoluten Pfad zum momentanen Directory an.
 
-\mint{cmdlexer.py:CommandLexer -x}{ls}
+\cmdline{ls}
 Zeigt Files und Directories im momentanen Ordner an.
 
-\mint{cmdlexer.py:CommandLexer -x}{ls <directory>}
+\cmdline{ls <directory>}
 Zeigt Files in einem Directory an.
 
-\mint{cmdlexer.py:CommandLexer -x}{ls -l}
+\cmdline{ls -l}
 Zeigt Files, etc in einer Listenstruktur an.
 
-\mint{cmdlexer.py:CommandLexer -x}{ls -a}
+\cmdline{ls -a}
 Zeigt \textbf{alle} Files und Ordner an, auch versteckte.
 
-\mint{cmdlexer.py:CommandLexer -x}{ls -h}
+\cmdline{ls -h}
 Zeigt alle von Menschen lesbare Dateien und Directories an.
 
-\mint{cmdlexer.py:CommandLexer -x}{ls -la}
+\cmdline{ls -la}
 Es können auch verschiedene Optionen kombiniert werden.
 
 \subsection{Erstellen von Directories}
 
-\mint{cmdlexer.py:CommandLexer -x}{mkdir <directory>}
+\cmdline{mkdir <directory>}
 Ein Directory im momentanen Directory erstellen.
 
-\mint{cmdlexer.py:CommandLexer -x}{mkdir /path/to/dir/newdir/}
+\cmdline{mkdir /path/to/dir/newdir/}
 Es kann auch ein Directory mit einem Pfad angegeben werden.
 
 Dabei ist das letzte Directory, dass das nur erstellt wird.
 
-\mint{cmdlexer.py:CommandLexer -x}{mkdir -p new/dir}
+\cmdline{mkdir -p new/dir}
 Mit der p-Flag können auch Subdirectories rekursiv erstellt werden.
 
-\mint{cmdlexer.py:CommandLexer -x}{mkdir {dir1,dir2,dir3}}
+\cmdline{mkdir {dir1,dir2,dir3}}
 Mit den geschwungene Klammern können mehrer Directories gleichzeitig erstellt werden.
 
-\mint{cmdlexer.py:CommandLexer -x}{mkdir -p new/{dir1,dir2,dir3}}
+\cmdline{mkdir -p new/{dir1,dir2,dir3}}
 Die Directories können auch rekursiv in einem Parent-Directory erstellt werden.
 
 \subsection{Erstellen von Files}
 
-\mint{cmdlexer.py:CommandLexer -x}{touch </path/to/file.txt>}
-Mit \mintinline{cmdlexer.py:CommandLexer -x}{touch} kann ein File erstellt werden.
+\cmdline{touch </path/to/file.txt>}
+Mit \cmdinline{touch} kann ein File erstellt werden.
 
 Falls das File schon exisitiert wird das Datum aktualisiert.
 
-\mint{cmdlexer.py:CommandLexer -x}{touch {file1,file2,file3}}
+\cmdline{touch {file1,file2,file3}}
 So können mehrere Files erstellt werden.
 
 \subsection{Files Löschen}
-\mint{cmdlexer.py:CommandLexer -x}{rm <file>}
-Mit \mintinline{cmdlexer.py:CommandLexer -x}{rm} kann ein oder mehrere Files löschen.
+\cmdline{rm <file>}
+Mit \cmdinline{rm} kann ein oder mehrere Files löschen.
 
-\mint{cmdlexer.py:CommandLexer -x}{rm -r <dir/>}
+\cmdline{rm -r <dir/>}
 Mit der r-Flag können auch Directories entfernt werden.
 
-\mint{cmdlexer.py:CommandLexer -x}{rm -f <file>}
+\cmdline{rm -f <file>}
 Um ein File zwingend zu löschen wird die f-Flag benötigt.
 
 \subsection{Files verschieben}
-\mint{cmdlexer.py:CommandLexer -x}{mv <arg1> <arg2>}
-Mit \mintinline{cmdlexer.py:CommandLexer -x}{mv} kann ein File oder Directory verschoben oder umbenannt werden.
+\cmdline{mv <arg1> <arg2>}
+Mit \cmdinline{mv} kann ein File oder Directory verschoben oder umbenannt werden.
 
 Vergleichbar mit Cut and Paste.
 
 \subsection{Files kopieren}
-\mint{cmdlexer.py:CommandLexer -x}{cp <path/to/file.txt> <path/to/new/file>}
+\cmdline{cp <path/to/file.txt> <path/to/new/file>}
 
-Mit \mintinline{cmdlexer.py:CommandLexer -x}{cp} können Files oder Directories kopiert werden.
+Mit \cmdinline{cp} können Files oder Directories kopiert werden.
 
 \subsection{Alias}
 Mit Aliases kann man Commands abkürzen.
 
-\mint{cmdlexer.py:CommandLexer -x}{alias hello='clear && echo "Hello"'}
+\cmdline{alias hello='clear && echo "Hello"'}
 
 \subsection{dos2unix}
-\mintinline{cmdlexer.py:CommandLexer -x}{dos2unix} ist kein Standardpaket und muss daher installiert werden.
+\cmdinline{dos2unix} ist kein Standardpaket und muss daher installiert werden.
 Es ist ein einfaches Tool um DOS(Windows) Newlines zu Unix Newlines zu konvertieren. 
+
+\section{Packagemanager}
+Im Gegensatz zu Windows braucht man bei Linux keine Software manuell runterzuladen.
+Dies wird automatisch mit einem Packagemanager gemacht.
+
+\subsection{apt}
+Das Advanced Packaging Tool(\cmdinline{apt}) ist ein Tool um Packages auf Debian, Ubuntu, etc zu installieren.
+
+\subsubsection{Packages installieren}
+Um ein Package zu installieren werden meistens Admin Rechte benötigt,
+daher muss vor dem Command ein \cmdinline{sudo} geschrieben werden.
+
+\cmdline{apt install <Package_1 Package_2 ... Package_n>}
+
+\subsubsection{Packages suchen}
+\cmdline{apt search <Package>}
 
 \section{Get Help}
 \subsection{Man-Page}
 Linux hat eine Bedinungsanleitung eingebaut, die sogenannte Man-Page.
 Diese sind nur zu gebrauchen, wenn man das Command schon kennt.
-\mint{cmdlexer.py:CommandLexer -x}{man <command>}
+\cmdline{man <command>}
 
 \subsection{TL;DR}
 Ein Tool mit Zusammenfassungen und Beispielen für verschieden Commands: \href{https://tldr.sh/}{https://tldr.sh}
