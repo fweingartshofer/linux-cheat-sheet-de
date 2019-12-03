@@ -11,7 +11,7 @@ class CommandLexer(RegexLexer):
         'root': [
             (r'#.*$', Comment.Multiline),
             (r'\".+\"', Text),
-            (r'^[A-Za-z0-9]+\s+',Keyword),
+            (r'^[ ]{0,}[A-Za-z0-9]+\s+',Keyword),
             (r'--?[^ \n]+\s+', Generic.Inserted),
             (r'[^ \n]+\s+', Generic.Deleted),
         ]
