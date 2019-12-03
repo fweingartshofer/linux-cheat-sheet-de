@@ -12,9 +12,7 @@
     urlcolor=cyan,
 }
 
-
 \usepackage{lmodern}
-
 \usepackage{minted}
 \usemintedstyle{emacs}
 
@@ -71,9 +69,16 @@ Ein verstecktes File, sie beginnen immer mit einem Punkt.
 Ein verstecktes Directory beginnt auch mit einem Punkt.
 
 \subsection{Wichtige Files}
+Folgende Files können im \mintinline{cmdlexer.py:CommandLexer -x}{$HOME} Directory gefunden werden.
 \subsubsection{.bashrc}
 Das \mintinline{cmdlexer.py:CommandLexer -x}{.bashrc} File ist ein Bash-Script, welches beim öffnen eines Terminals ausgeführt wird.
 Man kann es nutzen um Environment Variablen, Aliases zu setzen oder andere Einstellungen vorzunehmen.
+Es können auch Splashscreens oder Nachrichten ausgegeben werden.
+
+\begin{minted}{cmdlexer.py:CommandLexer -x}
+echo "Das heutige Wetter"
+curl wttr.in # Download the weather
+\end{minted}
 
 \subsection{Commands}
 Ein Command besteht aus verschiedenen Komponenten:
@@ -156,7 +161,29 @@ Mit \mintinline{cmdlexer.py:CommandLexer -x}{touch} kann ein File erstellt werde
 
 Falls das File schon exisitiert wird das Datum aktualisiert.
 
-\mint{cmdlexer.py:CommandLexer -x}{touch {file1,file2,file3}} 
+\mint{cmdlexer.py:CommandLexer -x}{touch {file1,file2,file3}}
+So können mehrere Files erstellt werden.
+
+\subsection{Files Löschen}
+\mint{cmdlexer.py:CommandLexer -x}{rm <file>}
+Mit \mintinline{cmdlexer.py:CommandLexer -x}{rm} kann ein oder mehrere Files löschen.
+
+\mint{cmdlexer.py:CommandLexer -x}{rm -r <dir/>}
+Mit der r-Flag können auch Directories entfernt werden.
+
+\mint{cmdlexer.py:CommandLexer -x}{rm -f <file>}
+Um ein File zwingend zu löschen wird die f-Flag benötigt.
+
+\subsection{Files verschieben}
+\mint{cmdlexer.py:CommandLexer -x}{mv <arg1> <arg2>}
+Mit \mintinline{cmdlexer.py:CommandLexer -x}{mv} kann ein File oder Directory verschoben oder umbenannt werden.
+
+Vergleichbar mit Cut and Paste.
+
+\subsection{Files kopieren}
+\mint{cmdlexer.py:CommandLexer -x}{cp <path/to/file.txt> <path/to/new/file>}
+
+Mit \mintinline{cmdlexer.py:CommandLexer -x}{cp} können Files oder Directories kopiert werden.
 
 \subsection{Alias}
 Mit Aliases kann man Commands abkürzen.
