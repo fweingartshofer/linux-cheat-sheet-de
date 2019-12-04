@@ -4,6 +4,7 @@
 \usepackage[a4paper]{geometry}
 \usepackage{titling}
 \usepackage[ngerman]{babel}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -26,12 +27,12 @@
 \author{Florian Weingartshofer}
 \date{\today}
 
+
 \begin{document}
 \maketitle
 \tableofcontents{}
 \newpage
 \section{Basics}
-
 \subsection{Filesystem}
 Das Linux Filesystem beginnt bei Root (der Pfad lautet: \cmdinline{/}).
 Von dort beginnt jeder absolute Pfad.\\
@@ -211,7 +212,7 @@ Mit Aliases kann man Commands abkürzen.
 
 \subsection{dos2unix}
 \cmdinline{dos2unix} ist kein Standardpaket und muss daher installiert werden.
-Es ist ein einfaches Tool um DOS(Windows) Newlines zu Unix Newlines zu konvertieren. 
+Es ist ein einfaches Tool, um DOS(Windows) Newlines zu Unix Newlines zu konvertieren. 
 
 \section{Packagemanager}
 Im Gegensatz zu Windows braucht man bei Linux keine Software manuell runterzuladen.
