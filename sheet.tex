@@ -14,9 +14,13 @@
 }
 
 \usepackage{lmodern}
+\usepackage{tikz}
 \usepackage{minted}
+
 \newcommand{\cmdinline}[1]{\mintinline{cmdlexer.py:CommandLexer -x}{#1}}
 \newcommand{\cmdline}[1]{\mint{cmdlexer.py:CommandLexer -x}{#1}}
+\newcommand{\bashinline}[1]{\mintinline{bash}{#1}}
+\newcommand{\bashline}[1]{\mint{bash}{#1}}
 
 \usemintedstyle{emacs}
 
@@ -33,6 +37,66 @@
 \tableofcontents{}
 \newpage
 \section{Basics}
+\subsection{User \& Kernelspace}
+\begin{tikzpicture}
+  \tikzstyle{arrow} = [thick,->,>=stealth]
+
+  %% USER SPACE
+  % Left Label
+  \node [draw=none] at (0,0) {User Space};
+  % GNU
+  \node [draw=none] at (7, 1.5) {Users (Multi-User)};
+  \draw [rounded corners, fill=green!25] (3, 1) rectangle (11, -1);
+  \node [draw=none] at (7, 0.8) {Programs};
+  % Shell
+  \draw [fill=yellow!25] (3.5, 0.5) rectangle (10.5, 0);
+  \node [draw=none] at (7, 0.25) {Shell};
+  % Add-Ons
+  \draw (3.5, -0.1) rectangle (5, -0.6);
+  \node [draw=none] at (4.25, -0.35) {Add-Ons};
+  % Command & Utilities
+  \draw [fill=yellow!25] (5.1, -0.1) rectangle (8.6, -0.6);
+  \node [draw=none] at (6.85, -0.35) {Commands \& Utilities};
+  % X/Desktops
+  \draw [fill=yellow!25] (8.7, -0.1) rectangle (10.5, -0.6);
+  \node [draw=none] at (9.6, -0.35) {X/Desktops};
+  % libc
+  \draw [rounded corners, fill=green!25] (7, -1.5) rectangle (11, -2.5);
+  \draw [fill=yellow!25] (7.2, -1.75) rectangle (10.8, -2.25);
+  \node [draw=none] at (9, -2.05) {GNU C Library (libc)};
+  \draw [line width=1mm] (9,-1.5) -- (9, -1);
+  
+  % Seperator
+  \draw [thick,dashed] (-1,-3) -- (14,-3);
+  
+  % Left Label
+  \node [draw=none] at (0,-6) {Kernel Space};
+  % Kernel
+  \draw [rounded corners, fill=red!25] (3, -3.5) rectangle (11, -8);
+  \node [draw=none] at (7, -3.7) {Kernel};
+  % System Call Interface
+  \draw [fill=yellow!25] (3.5, -4) rectangle (10.5, -4.5);
+  \node [draw=none] at (7, -4.25) {System Call Interface};
+  \draw [line width=1mm] (9,-2.5) -- (9, -4);
+  \draw [line width=1mm] (5,-1) -- (5, -4);
+  % Management
+  \draw [fill=yellow!25] (3.5, -5) rectangle (10.5, -6);
+  \node [draw=none,align=left] at (4.5, -5.5) {Process\\Management};
+  \node [draw=none,align=left] at (6.5, -5.5) {Memory\\Management};
+  \node [draw=none] at (7.9, -5.3) {File System};
+  \node [draw=none] at (9.5, -5.25) {Network};
+  % Drivers
+  \draw [fill=yellow!25] (3.5, -6.5) rectangle (10.5, -7.5);
+  \node [draw=none] at (7, -6.75) {Architecture Dependant Code};
+  \node [draw=none] at (7, -7.25) {Device Drivers};
+
+  % Hardware
+  \node [draw=none] at (7, -8.5) {Hardware};
+  
+  % Outer Box
+  \draw (2,2) rectangle (12,-9);
+\end{tikzpicture}
+
 \subsection{Filesystem}
 Das Linux Filesystem beginnt bei Root (der Pfad lautet: \cmdinline{/}).
 Von dort beginnt jeder absolute Pfad.\\
@@ -72,6 +136,12 @@ Ein verstecktes File, sie beginnen immer mit einem Punkt.
 \cmdline{.hidden_dir/}
 Ein verstecktes Directory beginnt auch mit einem Punkt.
 
+\cmdline{.}
+Ein Punkt zeigt nur das momentane Directory an.
+
+\cmdline{..}
+Zwei Punkte zeigen das Parent-Directory an.
+
 \subsection{Wichtige Files und Directories}
 Folgende Files und Directories können im \cmdinline{$HOME} Directory gefunden werden.
 \subsubsection{.bashrc}
@@ -91,6 +161,10 @@ Ein Init Script für die Z-Shell. Hat die selbe Funktionalität wie das \cmdinli
 Das \cmdinline{.config/} Directory ist ein Ordner im \cmdinline{.config/}
 In diesem Directory werden einige Config-Files gespeichert.
 
+\subsubsection{.profile}
+Dieses File befindet sich im Home-Directory jedes Benutzers, es existiert auch ein globals in \cmdinline{/etc/profile}.
+Es wird von der Bash und oft auch von Desktop-Environments ausgeführt.
+
 \subsection{Aufbau eines Commands}
 Ein Command besteht aus verschiedenen Komponenten:
 
@@ -109,7 +183,7 @@ Die Kurzform einer Option, wird nur mit einem Minus geschrieben.
 \cmdline{/home/}
 Ein Argument, manche Commands können mehrere Argumente erhalten.
 
-\subsection{sudo}
+\subsection{Adminrechte}
 Um einen Befehl als Admin auszuführen muss der \cmdinline{sudo} Befehl genutzt werden.
 
 \cmdline{sudo <Befehl>}
@@ -229,6 +303,34 @@ daher muss vor dem Command ein \cmdinline{sudo} geschrieben werden.
 
 \subsubsection{Packages suchen}
 \cmdline{apt search <Package>}
+
+\subsubsection{Packages entfernen}
+Dieses Command muss auch als Super User ausgeführt werden.
+\cmdline{apt remove <Package}
+
+\section{Scripting}
+\subsection{Environment-Variables}
+
+Environment-Variables sind mehr oder weniger globale Variablen, welche einen bestimmten Wert beinhalten.
+\begin{minted}{bash}
+  HELLO="Hello, "$USER # Setzt eine Variable "Hello" für die momentane Session.
+  # $USER gibt den Namen des eingeloggten User aus
+  echo $HELLO # Gibt die Variable aus.
+\end{minted}
+
+\subsubsection{Für momentane Shell}
+Um eine Variable nur für die momentane Shell zu setzen muss sie nur definiert werden: \bashinline{VAR="New Var"}.
+Diese wird verworfen sobald die Shell geschlossen wird.
+
+\subsubsection{Für momentane Shell und alle in ihr gestarteten Prozesse}
+Diese Variable ist für alle in Shell gestarteten Prozesse verfügbar, inklusive der Shell selber:
+\bashinline{export VAR="New Var"}
+Dies wird durch das \cmdinline{export} Keyword gemacht.
+Diese Variable wird verworfen sobald die Shell geschlossen wird.
+
+\subsubsection{Permanente Variablen}
+Um eine Variable permanent zu speichern muss sie nur in das \cmdinline{.bashrc} oder \cmdinline{.profile}, etc geschrieben werden.
+Hier kann auch wieder das \cmdinline{export} Keyword angewandt werden.
 
 \section{Get Help}
 \subsection{Man-Page}
