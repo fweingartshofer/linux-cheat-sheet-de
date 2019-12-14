@@ -306,11 +306,70 @@ daher muss vor dem Command ein \cmdinline{sudo} geschrieben werden.
 
 \subsubsection{Packages entfernen}
 Dieses Command muss auch als Super User ausgeführt werden.
-\cmdline{apt remove <Package}
+\cmdline{apt remove <Package>}
 
 \section{Scripting}
-\subsection{Environment-Variables}
+\subsection{Piping}
+Um Output als Input für ein anderes Programm zu nutzen, muss die Pipe verwendet werden (\cmdinline{|}).
 
+\subsection{Ausgabeumleitung}
+Output kann auch in verschiedene Files umgeleitet werden, diese werden automatisch angelegt:
+\begin{minted}{bash}
+  echo "Hello" > hello.txt  # Das File wird komplett überschrieben beim Umleiten.
+  echo "Hello" >> hello.txt # Der Text wird am Ende des Files angefügt,
+                            # sollte es schon Daten beinhalten.
+\end{minted}
+
+\subsection{Text-Editing Tools}
+Folgende Tools können zum manipulieren von Texten verwendet werden, speziell für CSV Files sind diese nützlich.
+Die meisten dieser Tools sind einheitlich aufgebaut:
+\cmdline{wc -l path/to/text/file}
+Als erstes wird das Command eingegeben, dann verschiedene Optionen und schluss endlich das Textfile, welches genutzt wird.
+\subsubsection{wc}
+Ein einfaches Tool zum Zählen von Zeichen, Zeilen, Wörtern, etc.
+\begin{minted}{cmdlexer.py:CommandLexer -x}
+  wc -l ./file # Zählt die Zeilen des Files
+  wc -w ./file # Anzahl der Wörter
+  man wc # Für weitere Optionen
+\end{minted}
+
+\subsubsection{tail}
+Ein Tool um die letzten n-Zeilen eines Files auszugeben.
+\cmdline{tail -n3 ./file }
+\noindent
+Die Wörter in der letzten Zeile zählen:
+\cmdline{tail -n1 ./file | wc -w }
+
+\subsubsection{head}
+Mit diesen Tool können die Anfangszeilen eines Files ausgegeben werden.
+\cmdline{head -n3 ./file # Die ersten drei Zeilen }
+\cmdline{head -3l ./file # Ident mit der -n Option }
+
+\subsubsection{cut}
+\cmdinline{cut} entfernt bestimmte Felder einer Datei, diese ist meist im CSV Format.
+Das Standardtrennzeichen ist ein Tab.
+\cmdline{cut -d'|' -f1,3 ./file }
+\noindent
+\cmdinline{-d';'} setzt das Trennzeichen auf ein Semicolon.\\
+\cmdinline{-f1,3} Wählt das erste und dritte Feld aus.
+
+\subsubsection{sort}
+\cmdinline{sort} sortiert ein File zeilenweise.
+\cmdline{sort -t'|' -k1 -r -n ./file }
+\noindent
+\cmdline{-t'|'} Setzt das Trennzeichen auf eine Pipe.
+\cmdline{-k1} Wählt das erste Feld aus.
+\cmdline{-r} Sortiert in umgekehrter Reihenfolge.
+\cmdline{-n} Sortiert nach nummerischen Werten.
+\noindent
+\cmdline{man sort} Für weitere Optionen.
+
+\subsubsection{uniq}
+Doppelte Werte werden gelöscht. \textbf{Funktioniert nur bei sortierten Files!}
+\cmdline{uniq ./file } Doppelte Werte löschen.
+\cmdline{uniq -c ./file} Doppelte Werte löschen und die Anzahl ausgeben.
+
+\subsection{Environment-Variables}
 Environment-Variables sind mehr oder weniger globale Variablen, welche einen bestimmten Wert beinhalten.
 \begin{minted}{bash}
   HELLO="Hello, "$USER # Setzt eine Variable "Hello" für die momentane Session.
