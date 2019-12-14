@@ -7,5 +7,9 @@ A command sheet with examples written in Latex and using a custom pygments lexer
 
 The whole sheet is written in german.
 
+# Release
+The PDF is build and deployed after every push.
+[Find the latest release here!](https://github.com/flohero/linux-cheat-sheet-de/releases/latest)
+
 # License
 This project is licensed under CC-BY-4.0
