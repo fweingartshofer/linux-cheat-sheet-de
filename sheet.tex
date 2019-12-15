@@ -314,7 +314,7 @@ Um Output als Input für ein anderes Programm zu nutzen, muss die Pipe verwendet
 
 \subsection{Ausgabeumleitung}
 Output kann auch in verschiedene Files umgeleitet werden, diese werden automatisch angelegt:
-\begin{minted}{bash}
+\begin{minted}{cmdlexer.py:CommandLexer -x}
   echo "Hello" > hello.txt  # Das File wird komplett überschrieben beim Umleiten.
   echo "Hello" >> hello.txt # Der Text wird am Ende des Files angefügt,
                             # sollte es schon Daten beinhalten.
@@ -368,6 +368,38 @@ Das Standardtrennzeichen ist ein Tab.
 Doppelte Werte werden gelöscht. \textbf{Funktioniert nur bei sortierten Files!}
 \cmdline{uniq ./file } Doppelte Werte löschen.
 \cmdline{uniq -c ./file} Doppelte Werte löschen und die Anzahl ausgeben.
+
+\subsubsection{awk}
+\cmdinline{awk} ist eines der mächtigsten Tools für Shell Scripting.
+Es beinhaltet eine eigene Script Sprache, welche Touring Complete ist.
+\cmdinline{awk} wurde für Oneliner-Scripts entwickelt,
+es können aber auch größere Programme damit entwicketl werden.
+
+\cmdinline{awk} interpretiert Leer- bzw. Tabzeichen als Delimiter,
+dass heißt es können wieder einzelene Felder angesprochen werden.
+Jede Zeile wird, wie bei anderen Tools auch, als eigener Record gesehen.
+
+\cmdinline{awk} Scripts können als ein File,
+welches üblicherweise auf \cmdinline{.awk} endet,
+übergeben werden, oder als String, welcher mit einem einfachem Hochkomma geschrieben wird.
+
+\paragraph{Syntax}
+\cmdline{awk 'contition {Action}' ./file}
+Bei \cmdinline{awk} ist der erste Teil des Scripts die Contition und der zweite Teil,
+welcher in geschwungenen Klammern geschrieben wird,
+ist die auszuführende Aktion.
+Die Contition überprüft für jede Zeile in einem File, etc ob sie darauf zutrifft.
+Man kann entweder die Contition weglasse, dadurch wird die Aktion für jede Zeile ausgeführt,
+oder die Aktion, damit wird einfach jede Zeile ausgegeben auf die die Contition zutrifft.
+
+\cmdline{awk '$2 > 2 { print $0 }' ./file}
+Bei diesem Script wird der Wert aus dem zweiten Feld überprüft ob dieser größer als zwei ist.
+Falls diese Bedingung zu trifft, wird die ganze Zeile ausgegeben, da \mintinline{bash}{$0} den Wert der ganzen Zeile beinhaltet.
+
+\paragraph{Aktionen}
+Eine Aktion kann ein \cmdinline{print} enthalten oder auch komplexere Oneliner oder Scripts:
+\cmdline{awk '$2 > 2 { print $0 > bigger_than_two.txt}' ./file}
+
 
 \subsection{Environment-Variables}
 Environment-Variables sind mehr oder weniger globale Variablen, welche einen bestimmten Wert beinhalten.
