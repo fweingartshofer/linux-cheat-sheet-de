@@ -308,7 +308,7 @@ daher muss vor dem Command ein \cmdinline{sudo} geschrieben werden.
 Dieses Command muss auch als Super User ausgeführt werden.
 \cmdline{apt remove <Package>}
 
-\section{Scripting}
+\section{Scripting und Textverarbeitung}
 \subsection{Piping}
 Um Output als Input für ein anderes Programm zu nutzen, muss die Pipe verwendet werden (\cmdinline{|}).
 
@@ -318,6 +318,12 @@ Output kann auch in verschiedene Files umgeleitet werden, diese werden automatis
   echo "Hello" > hello.txt  # Das File wird komplett überschrieben beim Umleiten.
   echo "Hello" >> hello.txt # Der Text wird am Ende des Files angefügt,
                             # sollte es schon Daten beinhalten.
+\end{minted}
+
+Man kann auch verschieden Outputs umleiten, wie stderr oder stdout.
+\begin{minted}{cmdlexer.py:CommandLexer -x}
+  ls dir/ 1> file.txt # Redirect den standard out ins file.txt
+  ls not/existing/dir/ 2> file.txt # Redirect standard error ins file.txt
 \end{minted}
 
 \subsection{Text-Editing Tools}
@@ -347,7 +353,7 @@ Mit diesen Tool können die Anfangszeilen eines Files ausgegeben werden.
 
 \subsubsection{cut}
 \cmdinline{cut} entfernt bestimmte Felder einer Datei, diese ist meist im CSV Format.
-Das Standardtrennzeichen ist ein Tab.
+Das Standardtrennzeichen ist ein Tab. Die Datei wird dabei nicht verändert.
 \cmdline{cut -d'|' -f1,3 ./file }
 \noindent
 \cmdinline{-d';'} setzt das Trennzeichen auf ein Semicolon.\\
@@ -416,7 +422,7 @@ Diese wird verworfen sobald die Shell geschlossen wird.
 \subsubsection{Für momentane Shell und alle in ihr gestarteten Prozesse}
 Diese Variable ist für alle in Shell gestarteten Prozesse verfügbar, inklusive der Shell selber:
 \bashinline{export VAR="New Var"}
-Dies wird durch das \cmdinline{export} Keyword gemacht.
+Dies wird durch das \cmdinline{export} Keyword erzielt.
 Diese Variable wird verworfen sobald die Shell geschlossen wird.
 
 \subsubsection{Permanente Variablen}
