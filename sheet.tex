@@ -499,8 +499,30 @@ A All Rechte.\\
 \begin{itemize}
 \item\cmdinline{chown <user> <file/dir>} ändert den Owner.
   Mit der \cmdinline{-R} Option rekursiv.
-  
+  \item\cmdinline{chgrp <group> <file/dir>} ändert die Gruppe.
 \end{itemize}
+
+\subsection{User Actions}
+\subsubsection{Add User}
+\cmdinline{useradd <username>} fügt einen User hinzu.
+Mit der Option \cmdinline{--create-home} wird auch gleich das Home Directory erstellt.
+
+\subsubsection{Delete User}
+\cmdinline{userdel <username>} löscht einen User.
+Die Option \cmdinline{-r} entfernt alle Files/Folder, welche initial erstellt wurden.
+
+\subsection{Gruppen}
+\subsubsection{Gruppe hinzufügen}
+\cmdinline{groupadd <group>}
+
+\subsubsection{Group löschen}
+\cmdline{groupdel <group>}
+
+\subsubsection{User zu Gruppe einfügen}
+\cmdinline{adduser <user> <group>} einen user zu einer Gruppe hinzufügen.
+
+\subsubsection{User aus einer Gruppe entfernen}
+\cmdinline{delgroup <group>}
 
 \section{Get Help}
 \subsection{Man-Page}
