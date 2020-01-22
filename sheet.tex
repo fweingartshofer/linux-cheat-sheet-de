@@ -429,6 +429,79 @@ Diese Variable wird verworfen sobald die Shell geschlossen wird.
 Um eine Variable permanent zu speichern muss sie nur in das \cmdinline{.bashrc} oder \cmdinline{.profile}, etc geschrieben werden.
 Hier kann auch wieder das \cmdinline{export} Keyword angewandt werden.
 
+\section{Regex}
+\href{https://regexr.com/}{https://regexr.com/}
+\begin{itemize}
+\item Dot-Operator \(.\)\\
+  Findet genau ein beliebiges Zeichen.
+\item Asterisk \(*\)\\
+  Bezieht sich auf den vorigen Operator.
+  Findet 0 - n Zeichen
+\item Plus-Operator \(+\)\\
+  Bezieht sich auf den vorigen Operator.
+  Findet 1 - n Zeichen
+\item Fragezeichen-Operator \(?\)\\
+  Voriger Operator kommt 0 - 1 vor.
+\item Pipe-Operator \(|\)\\
+  Wählt eine von zwei Möglichkeiten aus.
+  oft kombiniert mit der Gruppierung.
+\item Gruppierung\(()\)\\
+  Gruppiert verschiedene Operatoren.
+\item Auswahl \([]\)\\
+  Es wird ein Zeichen ausgewählt, welches in der eckigen Klammer geschrieben wird.
+\item Anfang \(\hat{}\)\\
+  Wählt den Zeilenanfang aus.
+  Innerhalb einer eckigen Klammer bedeutet es: alle Zeichen aus den angegebenen.
+\item Ende \(\$\)
+  Wählt Zeilenende aus.
+\item Newline \(\backslash n\)
+\item Tab \(\backslash t\)
+\item Space \(\backslash s\)
+\item Wortanfang und -ende \(\backslash b\)
+  
+\end{itemize}
+
+\section{Rechte}
+U User Rechte.\\
+G Group Rechte.\\
+O Other Rechte.\\
+A All Rechte.\\
+
+\subsection{File/Folder Rechte}
+\subsubsection{Folder}
+\begin{itemize}
+\item Read(4): Inhalt eines Ordners einsehen.
+\item Write(2): Inhalt eines Ordners Löschen.
+\item Execute(1): In einen Ordner hineinwechseln.
+\item Sticky Bit(1):
+  Erlaubt es jedem User Files/Directories in einem Directory zu erstellen/moven/löschen.
+  Allerdings darf nur der Besitzer eines Files, dieses entfernen/moven.
+  Beispiel: \cmdinline{/tmp}.
+\item SGID(2):
+  Alle Unterverzeichnisse/Files werden der Gruppe zugeordnet,
+  welcher das Parentdirectory gehört.
+\item SUID(4):
+  Alle Unterverzeichnisse/Files werden dem Owner des Parentdirectorys zugeordnet
+\end{itemize}
+
+\subsubsection{Files}
+\begin{itemize}
+\item Read(4): Inhalt eines Files anzeigen.
+\item Write(2): Inhalt eines Files ändern.
+\item Execute(1): File ausführen(zB Script).
+\item Sticky Bit(1): Wird von Linux ignoriert.
+\item SGID(2): Der User hat temporär die Rechte der Gruppe, wenn ausgeführt.
+\item SUID(4):
+  Ein File wird mit den Rechten des Owners ausgeführt. Beispiel: \cmdinline{passwd}.
+\end{itemize}
+
+\subsubsection{Owner/Group ändern}
+\begin{itemize}
+\item\cmdinline{chown <user> <file/dir>} ändert den Owner.
+  Mit der \cmdinline{-R} Option rekursiv.
+  
+\end{itemize}
+
 \section{Get Help}
 \subsection{Man-Page}
 Linux hat eine Bedinungsanleitung eingebaut, die sogenannte Man-Page.
