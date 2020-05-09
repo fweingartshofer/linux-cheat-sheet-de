@@ -185,6 +185,16 @@ uniq -c file <1>
 
 <1> Lösche doppelte Werte und gibt die Anzahl der gleich vorkommenden Werte aus
 
+===== grep
+Mit `grep` kann ein File zeilenweise gefiltert werden.
+Es werden nur Zeilen ausgegeben, welche mit einem vorher gegebenem Pattern übereinstimmen.
+[source,shell]
+grep -c 'Hello' test.txt <1>
+grep -E 'H[ea]llo' test.txt <2>
+
+<1> Mit `-c` werden die gefundenen Zeilen gezählt
+<2> Um Extended-Regex nutzen zu können muss die Option `-E` gegeben sein
+
 == Packagemanager
 Auf Linux Systemen wird das Installieren von Software von einem Packagemanager übernommen.
 Im Fall von Debian basierten Distros, dazu gehört auch Ubuntu, ist das `apt`.
