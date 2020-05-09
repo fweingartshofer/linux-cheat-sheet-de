@@ -1,0 +1,328 @@
+= Linux Cheatsheet
+Florian Weingartshofer <florian.weingartshofer@tuta.io>
+v1.0, :localdate:
+:Linux Cheatsheet:
+:icons: font
+:sectnums:
+:toclevels: 5
+:toc:
+
+<<<
+== Basics
+
+
+=== Filesystem-Navigation
+Das Filesystem beginnt bei `/`, also der Root.
+Die User Directories, auch Home-Directory genannt, befinden sich bei `/home/<username>`.
+Das Home-Directory des eigenen Users kann auch über `$HOME` angesprochen werden.
+
+==== Tilde
+Die Tilde `~` führt meistens ins Home-Directory des jeweiligen Users.
+Es gibt allerdings oft noch weitere Funktionen:
+
+- `~<username>` Führt zum Home-Directory von `<username>`
+- `~-` Vorherige Working-Directory
+- `~+` Momentanes Working-Directory
+
+Weitere Infos: https://stackoverflow.com/questions/998626/meaning-of-tilde-in-linux-bash-not-home-directory[stackoverflow.com]
+
+==== Files und Directories
+Es gibt einige Namenskonventionen, um das Arbeiten im Filesystem zu erleichtern:
+
+- `file.txt` Normales File
+- `dir/` Normales Directory
+- `.hidden.txt` Mit einem Punkt als Prefix, wird angezeigt dass ein File oder Directory versteckt ist
+- `.hidden_dir/` Verstecktes Directory
+- `.` Momentanes Directory
+- `..` Übergeordnetes Directory
+
+==== Wichtige Files und Directories
+Folgende Files und Directories können im Home-Directory gefunden werden.
+Sie sind meist auch in `/etc/` gespeichert.
+
+- `.bashrc` Dieses ist ein normales Bash-Script, welches beim Start eines neuen Terminal ausgeführt wird
+Es dient dazu Environment-Variablen, Aliases zu setzen oder andere Einstellungen vorzunehmen.
+Es wird auch häufig dazu genutzt eine Nachricht auszugeben, z.B.:
+[source,shell]
+echo "Hello World"
+curl wttr.in
+
+- `.zshrc` Hat ähnliche Funktionalität, wie das `.bashrc`
+- `.config/` Hier werden Config-Files für verschiedene Programme gespeichert,
+z.B. Google Chrome oder Virtual Box
+- `.profile` Dieses File wird meist von der Shell als auch von Desktop-Environments ausgeführt
+
+=== Wichtige Commands
+==== Adminrechte
+Mithilfe von `sudo` kann ein User sich als Admin anmelden
+oder auch nur ein einzelnes Command als Admin ausführen.
+[source,shell]
+sudo <Command>
+sudo rm file <1>
+
+<1> Nutzen von sudo um ein File zu löschen
+
+==== Navigation
+Mit `cd` kann man Directories wechseln.
+[source,shell]
+cd path/to/dir/ <1>
+cd <2>
+cd - <3>
+
+<1> In ein Directory wechseln
+<2> Wechselt ins Home-Directory
+<3> Ins vorherige Directory wechseln
+
+`ls` listet die Inhalte eines Directories auf.
+[source,shell]
+pwd <1>
+ls <2>
+ls <directory> <3>
+ls -l <4>
+ls -a <5>
+ls -h <6>
+
+<1> Zeigt absoluten Pfad zum momentanen Directory
+<2> Zeigt Files/Directories im momentanen Directory an
+<3> Zeigt Files/Directories im `<Directory an>`
+<4> Files/Directories in Listenstruktur anzeigen
+<5> *Alle* Files/Directories anzeigen, inklusive der Versteckten
+<6> Nur von Menschen lesbare Files anzeigen
+
+==== Erstellen von Files und Directories
+[source,shell]
+touch <path/to/file.txt> <1>
+touch {file1,file2,file3} <2>
+mkdir <directory> <3>
+mkdir {dir1,dir2,dir3} <4>
+mkdir -p parent/dir <5>
+
+<1> Erstellt ein File
+<2> Erstellt `file1, file2, file3`
+<3> Erstellt ein Directory
+<4> Erstellt `dir1, dir2, dir3`
+<5> Erstellt Directories rekursiv
+
+==== Löschen von Files und Directories
+[source,shell]
+rm <file> <1>
+rmdir <dir> <2>
+rm -r <dir> <3>
+rm -f <file> <4>
+
+<1> Löscht ein File
+<2> Löscht ein leeres Directory
+<3> Löscht ein Directory und dessen Inhalt
+<4> Löscht zwingend ein File
+
+==== Kopieren und Verschieben von Files und Directories
+[source,shell]
+cp <from> <to> <1>
+cp -r <from> <to> <2>
+mv <from> <to> <3>
+
+<1> Kopiert File von A nach B
+<2> Kopiert Directory rekursiv
+<3> Verschiebt File/Directory
+
+==== Alias
+Mit einem Alias kann man häufig genutzte Commands ersetzen.
+[source,shell]
+alias ll='ls -lh'
+
+==== Text-Editing Tools
+Mit folgenden Tools können Files manipuliert werden, sie werden allerdings nicht verändert.
+Viele dieser Tools funktionieren nur mit CSV-Files.
+
+===== wc
+Tool zum Zählen von Zeichen, Zeilen, Wörtern, etc.
+[source,shell]
+wc -l <1>
+wc -w <2>
+
+<1> Zählen von Zeilen
+<2> Zählen von Wörtern
+
+===== head/tail
+`head` gibt die ersten `n`-Zeilen eines Inputs, z.B. File, aus.
+
+`tail` gibt die letzten `n`-Zeilen aus.
+[source,shell]
+head -3l file.txt <1>
+tail -3l file.txt <2>
+
+<1> Ersten drei Zeilen
+<2> Letzten drei Zeilen
+
+===== cut
+Entfernt bestimmte Felder eines CSV-Files.
+[source,shell]
+cut -d'|' -f1,3 file.txt
+-d'|' <1>
+-f1,3 <2>
+
+<1> Gibt als Trennzeichen eine Pipe an
+<2> Es werden nur die erste und dritte Spalte ausgegeben
+
+===== sort
+Sortiert ein File zeilenweise.
+[source,shell]
+sort -t'|' -k1 -r -n file
+-t'|' <1>
+-k1 <2>
+-r <3>
+-n <4>
+
+<1> Als Trennzeichen wird eine Pipe angegeben
+<2> Es wird nach der ersten Spalte sortiert
+<3> In umgekehrter Reihenfolge sortieren
+<4> Nummerisch sortieren
+
+===== uniq
+Doppelte Werte werden gelöscht. *Funktioniert nur bei sortierten Files!*
+[source,shell]
+uniq -c file <1>
+
+<1> Lösche doppelte Werte und gibt die Anzahl der gleich vorkommenden Werte aus
+
+== Packagemanager
+Auf Linux Systemen wird das Installieren von Software von einem Packagemanager übernommen.
+Im Fall von Debian basierten Distros, dazu gehört auch Ubuntu, ist das `apt`.
+Meist muss zum Installieren und Entfernen von Paketen `sudo` genutzt werden.
+[source,shell]
+apt install <package> <1>
+apt search <query> <2>
+apt remove <package> <3>
+
+<1> Installiere ein Paket
+<2> Suche ein Paket
+<3> Entferne ein Paket
+
+== Scripting
+=== Piping
+Mithilfe der Pip `|` kann die Ausgabe eines Befehls zum nächsten weitergeleitet werden.
+[source,shell]
+cat file.txt | grep "hello"
+
+=== Ausgabeumleitung
+Output kann auch in Files umgeleitet werden,
+diese werden, sollten sie nicht existieren, automatisch angelegt
+[source,shell]
+echo "Hello" > hello.txt <1>
+echo "Hello" >> hello.txt <2>
+ls dir/ 1> file.txt <3>
+ls not/extisting/dir> error.txt <4>
+
+<1> File wird komplett überschrieben
+<2> Ausgabe wird am Ende des Files angefügt
+<3> Standard-Output(stdout) wird umgeleitet
+<4> Error-Output(stderr) wird umgeleitet
+
+=== Environment-Variablen
+Environment-Variablen sind Variablen, welche einen oder keinen Wert beinhalten.
+Diese Variablen sind allerdings nicht überall verfügbar.
+[source,shell]
+HELLO="Hello, "$USER <1>
+echo $HELLO <2>
+export $HELLO <3>
+
+<1> Die `$USER` Variable wird beim Login gesetzt und enthält den momentan aktiven.
+`$HELLO` ist nur für die momentane Shell verfügbar
+<2> Gibt den Inhalt von `$HELLO` aus
+<3> Nun ist `$HELLO` auch für die Subprozesse der Shell verfügbar.
+
+Um eine permanente Variable zu erzeugen, muss diese ins `.profile` File geschrieben werden.
+Dadurch ist sie weitgehend verfügbar.
+
+Soll die Variable nur für Shells verfügbar sein, muss diese ins `.bashrc` geschrieben werden.
+Dadurch ist sie nur für die Bash verfügbar.
+
+
+=== awk
+`awk` ist eines der mächtigsten Tools für Shell Scripting. Es beinhaltet eine eigenen Scripting Sprache,
+welche Touring Complete ist.
+`awk` ist gedacht für Oneliner-Scripts, es können aber auch größere Scripts entwickelt werden.
+Am besten wird es mit CSV Files genutzt, da `awk` meist zeilenweise arbeitet.
+
+==== Syntax
+Der Anfang eines Scripts enthält eine Condition, so wie ein `if`,
+der zweite Teil eine Aktion, welche ausgeführt werden soll.
+Man kann einzelne Spalten eines Files mit `$n` ansprechen,
+wobei `n` durch die Spaltennummer ersetzt wird.
+`$0` ist die gesamte Zeile, welche übergeben wird.
+[source,awk]
+$2 > 2 { print $0} <1>
+$2 > 2 { print $0 > bigger_than_two.txt} <2>
+
+<1> Es wird überprüft ob der Wert in Spalte 2 Zeile `n` größer als 2 ist,
+wenn dies zutrifft, wird die gesamte Zeile `0` ausgegeben
+<2> Gleich wie oben, allerdings werden die Zeilen in ein File gespeichert
+
+== Rechte
+[format="csv",cols="2"]
+|======
+U,User Rechte
+G,Group Rechte
+O,Other Rechte
+A,All Rechte
+|======
+
+=== File/Folder Rechte
+==== Folder
+- Read(4): Inhalt eines Ordners ansehen
+- Write(2): Inhalt eines Ordners löschen
+- Execute(1): In einen Ordner wechseln
+- Sticky Bit(1): Nur der Besitzer eines Files/Dir darf dieses entfernen/verschieben, z.B. `/tmp`
+- SGID(2): Alle Unterverzeichnisse/Files werden der Gruppe zugeordnet, welcher das Parentdirectory gehört
+- SUID(4): Alle Unterverzeichnisse/Files werden dem Owner des Parentdirectorys zugeordnet
+
+==== Files
+- Read(4): Inhalt eines Files ansehen
+- Write(2): Inhalt eines Files ändern
+- Execute(1): File ausführen, z.B. Script
+- Sticky Bit(1): Wird ignoriert
+- SGID(2): Der User hat temporär die Rechte der Gruppe, wenn ausgeführt
+- SUID(4): Ein File wird mit den Rechten des Owners ausgeführt, z.B. `passwd`
+
+==== Owner/Group ändern
+[source,shell]
+chown <user> <file/dir> <1>
+chgrp <group> <file/dir> <2>
+
+<1> Ändert den Owner, mit `-R` rekursiv
+<2> Ändert die Gruppe
+
+=== User Actions
+[source,shell]
+useradd <username> <1>
+userdel <username> <2>
+
+<1> Fügt einen User hinzu. Mit der Option `--create-home` wird auch das Home-Directory erstellt
+<2> Löscht User. Die Option `-r` entfernt alle Files/Dirs, welche initial erstellt wurden
+
+=== Group Actions
+[source,shell]
+groupadd <group> <1>
+groupdel <group> <2>
+adduser <user> <group> <3>
+delgroup <group> <4>
+
+<1> Fügt eine Gruppe hinzu
+<2> Löscht eine Gruppe
+<3> Fügt einen User zu einer Gruppe
+<4> Entfernt User aus Gruppe
+
+== Hilfe!
+=== Man
+Mithilfe von `man` kann man sich die Manual-Page anschauen.
+Die meisten Commandline-Tools besitzen eine.
+[source,shell]
+man <command>
+man ls
+
+=== TL;DR
+Ein Tool mit Zusammenfassungen und Beispielen für verschiedene COmmands: https://tldr.sh
+
+=== Regex
+https://regexr.com
+
