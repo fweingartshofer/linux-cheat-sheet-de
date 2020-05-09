@@ -1,14 +1,13 @@
-sudo: required
 os: linux
 arch: arm64
 dist: bionic
 language: java
 branches:
   only:
-  - master
-  - develop
+    - master
+    - develop
 script:
-- ./mvnw
+  - ./mvnw
 deploy:
   provider: releases
   api_key:
