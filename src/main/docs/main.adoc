@@ -1,6 +1,7 @@
 = Linux Cheatsheet
 Florian Weingartshofer <florian.weingartshofer@tuta.io>
-v1.0, :localdate:
+:revnumber: v1.0
+:revdate:
 :Linux Cheatsheet:
 :icons: font
 :sectnums:
@@ -194,6 +195,17 @@ grep -E 'H[ea]llo' test.txt <2>
 
 <1> Mit `-c` werden die gefundenen Zeilen gezählt
 <2> Um Extended-Regex nutzen zu können muss die Option `-E` gegeben sein
+
+====== grep Regex
+Extended Regex von `grep` ist unterschiedlich zum normalen Regex.
+
+- `\[[:alnum:]]` Alphanumerische Characters
+- `\[[:alpha:]]` Alphabetische Characters
+- `\[[:blank:]]` Space und Tab
+- `\[[:digit:]]` Ziffern
+- `\[[:lower:]]` Kleinschreibung
+- `\[[:space:]]` Tab, Newline, Vertical Tab, Page Break, Carriage Return, und Space
+- `\[[:upper:]]` Großschreibung
 
 == Packagemanager
 Auf Linux Systemen wird das Installieren von Software von einem Packagemanager übernommen.
