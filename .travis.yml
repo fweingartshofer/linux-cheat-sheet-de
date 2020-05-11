@@ -9,9 +9,11 @@ branches:
 script:
   - ./mvnw
 before_deploy:
-  - ls
-  - ls target/generated-docs/
-  - mv target/generated-docs/main.html target/generated-docs/index.html
+  - >
+    if ! [ "$BEFORE_DEPLOY_RUN" ]; then
+      export BEFORE_DEPLOY_RUN=1;
+      mv target/generated-docs/main.html target/generated-docs/index.html
+    fi
 deploy:
   - provider: releases
     token: $GITHUB_TOKEN
