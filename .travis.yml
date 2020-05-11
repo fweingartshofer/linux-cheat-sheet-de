@@ -10,12 +10,12 @@ script:
   - ./mvnw
 deploy:
   - provider: releases
-    github_token: $GITHUB_TOKEN
+    token: $GITHUB_TOKEN
     skip_cleanup: true
     on:
       repo: flohero/linux-cheat-sheet-de
   - provider: pages
-    github_token: $GITHUB_TOKEN
+    token: $GITHUB_TOKEN
     local_dir: "target/generated-docs/"
     skip_cleanup: true
     on:
