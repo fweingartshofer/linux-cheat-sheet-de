@@ -8,6 +8,8 @@ branches:
     - develop
 script:
   - ./mvnw
+before_install:
+  - mv ./target/generated-docs/main.html ./target/generated-docs/index.html
 deploy:
   - provider: releases
     token: $GITHUB_TOKEN
