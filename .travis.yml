@@ -9,7 +9,9 @@ branches:
 script:
   - ./mvnw
 before_deploy:
-  - mv ./target/generated-docs/main.html ./target/generated-docs/index.html
+  - ls
+  - ls target/generated-docs/
+  - mv target/generated-docs/main.html target/generated-docs/index.html
 deploy:
   - provider: releases
     token: $GITHUB_TOKEN
