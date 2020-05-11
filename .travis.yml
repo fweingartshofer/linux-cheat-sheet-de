@@ -9,10 +9,17 @@ branches:
 script:
   - ./mvnw
 deploy:
-  provider: releases
-  api_key:
-    secure: Zi7/flRiPgTeLhqfVaJXiNusFkBJsItmRws7KTKZyCXZO6086tAZJ21bhzWd5gv4wXUqJ0zRIdSsuAP4RKbltpEDnZroOHG7F4tb6U5RlrddIf3h4oq78WRLVYh4JorGhY18NTDePt9rUaC3EHQ6jd5/sIjY6GnXWAo/PNcjUJYoepJLRmrOXLtF7s5iByx4Pn8LjcfCF0943uOyi0/krFd4D4Ns9PkHc9eJW+eCJPKJ3wIookPTFHCBaD5nwZuEVRw0UH3D2t5py31fQmqOUmkD5RcKZCvsCfCXPFg0vRz9jD5/p/jj630UDdzzJYKo48P33GFqGwfY2Jn2PRTobW+4kHXNkCQ8X1js6cYuBe+vdWrP79n9Xt+VSWeDsvu+NdWE6sSOks7+KaSc/NiPuTyUS+w2A96gIp35spGFPc9nsoa4jZzfgZRlWbqmfGYQVcirmAFbiMEVVhZrVWKVU89fl/TgFpKULlDWyxYB6tJdsuQ0P2XLVB6ftEpu0bARjubayZvboj8V7DVohzaIZWdl9eXuGm4KDCCEZHK33kUz5VvLnPZqebzdXva5MQppF9ssuGKeWFdNygwYRkYj34XUZUcpdoMvWwMPlV93S0LydPkXpH9XlF2QCNt+sA28iBGFHgKH4mcaR5aaKc1neNPPJFNurjuOR+jvGE6tPQg=
-  file: "target/generated-docs/main.pdf"
-  skip_cleanup: true
-  on:
-    repo: flohero/linux-cheat-sheet-de
+  - provider: releases
+    api_key:
+      secure: Zi7/flRiPgTeLhqfVaJXiNusFkBJsItmRws7KTKZyCXZO6086tAZJ21bhzWd5gv4wXUqJ0zRIdSsuAP4RKbltpEDnZroOHG7F4tb6U5RlrddIf3h4oq78WRLVYh4JorGhY18NTDePt9rUaC3EHQ6jd5/sIjY6GnXWAo/PNcjUJYoepJLRmrOXLtF7s5iByx4Pn8LjcfCF0943uOyi0/krFd4D4Ns9PkHc9eJW+eCJPKJ3wIookPTFHCBaD5nwZuEVRw0UH3D2t5py31fQmqOUmkD5RcKZCvsCfCXPFg0vRz9jD5/p/jj630UDdzzJYKo48P33GFqGwfY2Jn2PRTobW+4kHXNkCQ8X1js6cYuBe+vdWrP79n9Xt+VSWeDsvu+NdWE6sSOks7+KaSc/NiPuTyUS+w2A96gIp35spGFPc9nsoa4jZzfgZRlWbqmfGYQVcirmAFbiMEVVhZrVWKVU89fl/TgFpKULlDWyxYB6tJdsuQ0P2XLVB6ftEpu0bARjubayZvboj8V7DVohzaIZWdl9eXuGm4KDCCEZHK33kUz5VvLnPZqebzdXva5MQppF9ssuGKeWFdNygwYRkYj34XUZUcpdoMvWwMPlV93S0LydPkXpH9XlF2QCNt+sA28iBGFHgKH4mcaR5aaKc1neNPPJFNurjuOR+jvGE6tPQg=
+    file: "target/generated-docs/main.pdf"
+    skip_cleanup: true
+    on:
+      repo: flohero/linux-cheat-sheet-de
+  - provider: pages
+    api_key:
+      secure: Zi7/flRiPgTeLhqfVaJXiNusFkBJsItmRws7KTKZyCXZO6086tAZJ21bhzWd5gv4wXUqJ0zRIdSsuAP4RKbltpEDnZroOHG7F4tb6U5RlrddIf3h4oq78WRLVYh4JorGhY18NTDePt9rUaC3EHQ6jd5/sIjY6GnXWAo/PNcjUJYoepJLRmrOXLtF7s5iByx4Pn8LjcfCF0943uOyi0/krFd4D4Ns9PkHc9eJW+eCJPKJ3wIookPTFHCBaD5nwZuEVRw0UH3D2t5py31fQmqOUmkD5RcKZCvsCfCXPFg0vRz9jD5/p/jj630UDdzzJYKo48P33GFqGwfY2Jn2PRTobW+4kHXNkCQ8X1js6cYuBe+vdWrP79n9Xt+VSWeDsvu+NdWE6sSOks7+KaSc/NiPuTyUS+w2A96gIp35spGFPc9nsoa4jZzfgZRlWbqmfGYQVcirmAFbiMEVVhZrVWKVU89fl/TgFpKULlDWyxYB6tJdsuQ0P2XLVB6ftEpu0bARjubayZvboj8V7DVohzaIZWdl9eXuGm4KDCCEZHK33kUz5VvLnPZqebzdXva5MQppF9ssuGKeWFdNygwYRkYj34XUZUcpdoMvWwMPlV93S0LydPkXpH9XlF2QCNt+sA28iBGFHgKH4mcaR5aaKc1neNPPJFNurjuOR+jvGE6tPQg=
+    file: "target/generated-docs/main.html"
+    skip_cleanup: true
+    on:
+      repo: flohero/linux-cheat-sheet-de
