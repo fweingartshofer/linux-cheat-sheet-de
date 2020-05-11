@@ -8,7 +8,7 @@ branches:
     - develop
 script:
   - ./mvnw
-before_install:
+before_deploy:
   - mv ./target/generated-docs/main.html ./target/generated-docs/index.html
 deploy:
   - provider: releases
