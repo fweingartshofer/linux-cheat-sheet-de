@@ -343,8 +343,45 @@ man <command>
 man ls
 
 === TL;DR
-Ein Tool mit Zusammenfassungen und Beispielen für verschiedene COmmands: https://tldr.sh
+Ein Tool mit Zusammenfassungen und Beispielen für verschiedene Commands: https://tldr.sh
 
 === Regex
 https://regexr.com
 
+== Fancy Shell
+Funktioniert nur mit Debian-basierten Distros.
+
+[CAUTION]
+====
+Folgende Befehle sind nicht als komplettes Script zu sehen!
+====
+
+=== Einfache Variante
+[source,shell]
+sudo apt install fish <1>
+chsh -s /usr/bin/fish <2>
+
+<1> Installiert die Fish-Shell
+<2> Setze die Standard-Shell auf Fish-Shell
+
+=== Komplexe Variante
+Im gegensatz zur einfachen Variante,
+wird hier das Framework https://github.com/ohmyzsh/ohmyzsh[oh-my-zsh] genutzt.
+Mit diesem können Plugins und Themes verwaltet werden.
+[source,shell]
+sudo apt install zsh git curl <1>
+chsh -s /usr/bin/zsh <2>
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" <3>
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git <4>
+echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \\
+    >> ${ZDOTDIR:-$HOME}/.zshrc
+git clone https://github.com/zsh-users/zsh-autosuggestions \\
+${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions <5>
+nano ~/.zshrc <6>
+
+<1> Installiere die ZSH-Shell, Git und curl
+<2> Setze die die Standard-Shell auf ZSH-Shell
+<3> Installiere OH-MY-ZSH
+<4> Installiere das Syntax-Highlighting Plugin
+<5> Installiere das Auto-Suggestions Plugin
+<6> Nun müssen die Plugins im `plugins` Array hinzugefügt werden
