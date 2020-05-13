@@ -18,6 +18,7 @@ deploy:
   - provider: releases
     token: $GITHUB_TOKEN
     cleanup: false
+    skip_cleanup: true
     file: "target/generated-docs/main.pdf"
     on:
       repo: flohero/linux-cheat-sheet-de
@@ -25,5 +26,6 @@ deploy:
     token: $GITHUB_TOKEN
     local_dir: "target/generated-docs/"
     cleanup: false
+    skip_cleanup: true
     on:
       repo: flohero/linux-cheat-sheet-de
