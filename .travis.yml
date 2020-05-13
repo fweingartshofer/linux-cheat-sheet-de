@@ -17,13 +17,13 @@ before_deploy:
 deploy:
   - provider: releases
     token: $GITHUB_TOKEN
-    skip_cleanup: true
+    cleanup: false
     file: "target/generated-docs/main.pdf"
     on:
       repo: flohero/linux-cheat-sheet-de
   - provider: pages
     token: $GITHUB_TOKEN
     local_dir: "target/generated-docs/"
-    skip_cleanup: true
+    cleanup: false
     on:
       repo: flohero/linux-cheat-sheet-de
