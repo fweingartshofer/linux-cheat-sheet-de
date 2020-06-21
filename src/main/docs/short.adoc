@@ -1,0 +1,113 @@
+= Linux Short Cheatsheet
+Florian Weingartshofer <florian.weingartshofer@tuta.io>
+:revnumber: v1.0
+:revdate:
+:Linux Cheatsheet:
+:icons: font
+
+[source,shell]
+wc -l <1>
+
+<1> Zählen von Zeilen
+
+[source,shell]
+cut -d'|' -f1,3 file.txt <1> <2>
+
+
+<1> Gibt als Trennzeichen eine Pipe an
+<2> Es werden nur die erste und dritte Spalte ausgegeben
+
+[source,shell]
+sort -t'|' -k1 -r -n file <1> <2> <3> <4>
+
+<1> Als Trennzeichen wird eine Pipe angegeben
+<2> Es wird nach der ersten Spalte sortiert
+<3> In umgekehrter Reihenfolge sortieren
+<4> Nummerisch sortieren
+
+[source,shell]
+uniq -c file <1>
+
+<1> Lösche doppelte Werte und gibt die Anzahl der gleich vorkommenden Werte aus
+
+[source,shell]
+grep -Evc 'H[ae]llo' test.txt <1> <2> <3>
+
+<1> Mit `-c` werden die gefundenen Zeilen gezählt
+<2> Um Extended-Regex nutzen zu können muss die Option `-E` gegeben sein
+<3> Gibt alle nicht gematched Zeilen zurück
+
+Extended Regex von `grep` ist unterschiedlich zum normalen Regex.
+
+- `\[[:alnum:]]` Alphanumerische Characters
+- `\[[:alpha:]]` Alphabetische Characters
+- `\[[:blank:]]` Space und Tab
+- `\[[:digit:]]` Ziffern
+- `\[[:lower:]]` Kleinschreibung
+- `\[[:space:]]` Tab, Newline, Vertical Tab, Page Break, Carriage Return, und Space
+- `\[[:upper:]]` Großschreibung
+
+
+[source,shell]
+sed 's/<regex>/<replace>/' file <1>
+sed -r 's/<regex>/<replace>/<flag>' file <2>
+sed 'n,ms/<pattern>/replace/' <3>
+sed '/<line_pattern>/s/<find>/<replace>/' <file> <4>
+sed '/<regex>/d' <file> <5>
+sed -n '<n>,/^$/p' <file> <6>
+sed 's#<regex>#<replace>#' <file> <7>
+sed -r 'n,m {<commands>}' <8>
+
+<1> Ersetzt pro Zeile einmal den `<regex>` durch `<replace>`
+<2> Mit `-r` wird der extended Regex genutzt. Am Ende kann auch eine Flag angegeben werden,
+z.B. die `g` Global Flag, mit dieser wird nicht pro Zeile, sondern alles gematched
+<3> Ersetze das pattern in den Zeilen `n` - `m`
+<4> Ersetzt nur die Matches in den Zeilen, welche das `<line_pattern>` erfüllen
+<5> Löscht die Zeilen, welche einen Match haben
+<6> Gibt alle Zeilen von `<n>` bis zur nächsten leeren Zeile aus
+<7> Ein Slash `/` als Trennzeichen kann auch durch ein anderes ersetzt werden, z.B. eine Raute `#`
+<8> Führe `command` beim `n` ten auftreten bis Zeile `m` aus
+
+[source,shell]
+for i in * <1>
+IFS=';' <2>
+for el in $var <2>
+while read v1 v2 v3; do <3>
+done < $file <3>
+if [ ] && [ ] <4>
+
+<1> Gehe alle Files im momentanen Directory durch
+<2> Gehe alle Elemente durch welche mit `IFS` separiert sind
+<3> Lese zeilenweise ein File aus, die Variablen bei read werden je nach `IFS` eingefügt
+<4> If Verzweigung
+
+.Table Vergleichsoperatoren
+|===
+2+^| Zahlenwert testen
+| `-eq` | equals
+| `-ne` | not equals
+| `-lt` | less than
+| `-le` | less or equal than
+| `-gt` | greater than
+| `-ge` | greater or equals than
+2+^| Files/Directories Testen
+| `-d` | Ist ein Verzeichnis
+| `-e` | File existiert
+| `-f` | Reguläre Datei
+| `-r` | Benutzer Leserechte auf File
+| `-w` | Benutzer Schreibrechte auf File
+| `-x` | Benutzer Ausführrechte auf File
+| `-s` | Datei nicht leer
+2+^| Dateivergleich
+| `-nt` | Datei1 neuer als Datei2
+| `-ot` | Datei1 älter als Datei2
+| `-ef` | Dateien selbe Inode-Nummer (Hardlinks)
+2+^| Zeichenkettenvergleich
+| `=` | Zeichenketten gleich
+| `!=` | Zeichenketten unterschiedlich
+| `-z` | Zeichenkette leer
+| `-n` | Zeichenkette nicht leer
+2+^| Logische Verknüpfungen
+| `!` | Not
+| `-a` | And
+| `-o` | Or
