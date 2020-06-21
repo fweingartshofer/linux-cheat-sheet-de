@@ -212,18 +212,22 @@ Der Streaming Editior kann genutzt werden, um Text zeilenweise zu manipulieren.
 [source,shell]
 sed 's/<regex>/<replace>/' file <1>
 sed -r 's/<regex>/<replace>/<flag>' file <2>
-sed '/<line_pattern>/s/<find>/<replace>/' <file> <3>
-sed '/<regex>/d' <file> <4>
-sed -n '<n>,/^$/p' <file> <5>
-sed 's#<regex>#<replace>#' <file> <6>
+sed 'n,ms/<pattern>/replace/' <3>
+sed '/<line_pattern>/s/<find>/<replace>/' <file> <4>
+sed '/<regex>/d' <file> <5>
+sed -n '<n>,/^$/p' <file> <6>
+sed 's#<regex>#<replace>#' <file> <7>
+sed -r 'n,m {<commands>}' <8>
 
 <1> Ersetzt pro Zeile einmal den `<regex>` durch `<replace>`
 <2> Mit `-r` wird der extended Regex genutzt. Am Ende kann auch eine Flag angegeben werden,
 z.B. die `g` Global Flag, mit dieser wird nicht pro Zeile, sondern alles gematched
-<3> Ersetzt nur die Matches in den Zeilen, welche das `<line_pattern>` erfüllen
-<4> Löscht die Zeilen, welche einen Match haben
-<5> Gibt alle Zeilen von `<n>` bis zur nächsten leeren Zeile aus
-<6> Ein Slash `/` als Trennzeichen kann auch durch ein anderes ersetzt werden, z.B. eine Raute `#`
+<3> Ersetze das pattern in den Zeilen `n` - `m`
+<4> Ersetzt nur die Matches in den Zeilen, welche das `<line_pattern>` erfüllen
+<5> Löscht die Zeilen, welche einen Match haben
+<6> Gibt alle Zeilen von `<n>` bis zur nächsten leeren Zeile aus
+<7> Ein Slash `/` als Trennzeichen kann auch durch ein anderes ersetzt werden, z.B. eine Raute `#`
+<8> Führe `command` beim `n'ten auftreten bis Zeile `m` aus
 
 == Packagemanager
 Auf Linux Systemen wird das Installieren von Software von einem Packagemanager übernommen.
@@ -251,7 +255,7 @@ diese werden, sollten sie nicht existieren, automatisch angelegt
 echo "Hello" > hello.txt <1>
 echo "Hello" >> hello.txt <2>
 ls dir/ 1> file.txt <3>
-ls not/extisting/dir> error.txt <4>
+ls not/extisting/dir 2> error.txt <4>
 
 <1> File wird komplett überschrieben
 <2> Ausgabe wird am Ende des Files angefügt
