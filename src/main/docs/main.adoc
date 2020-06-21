@@ -227,7 +227,7 @@ z.B. die `g` Global Flag, mit dieser wird nicht pro Zeile, sondern alles gematch
 <5> Löscht die Zeilen, welche einen Match haben
 <6> Gibt alle Zeilen von `<n>` bis zur nächsten leeren Zeile aus
 <7> Ein Slash `/` als Trennzeichen kann auch durch ein anderes ersetzt werden, z.B. eine Raute `#`
-<8> Führe `command` beim `n'ten auftreten bis Zeile `m` aus
+<8> Führe `command` beim `n` ten auftreten bis Zeile `m` aus
 
 == Packagemanager
 Auf Linux Systemen wird das Installieren von Software von einem Packagemanager übernommen.
