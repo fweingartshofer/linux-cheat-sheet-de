@@ -19,7 +19,9 @@ deploy:
     token: $GITHUB_TOKEN
     cleanup: false
     skip_cleanup: true
-    file: "target/generated-docs/main.pdf"
+    file:
+      - "target/generated-docs/main.pdf"
+      - "target/generated-docs/short.pdf"
     on:
       repo: flohero/linux-cheat-sheet-de
   - provider: pages
